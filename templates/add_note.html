@@ -1,0 +1,21 @@
+{% comment %} <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}              
+    <button type="submit">Speichern</button>
+</form> {% endcomment %}
+
+<form method="POST">
+    {% csrf_token %}
+   {{form}}
+    <button type="submit">Submit</button>
+</form>
+
+<h2>Hello Notes 2 </h2>
+
+<ul>
+{% for i in existing_notes %}
+    
+    <li style= "min-height: 50px; background-color:#ddd; padding: 10px; border-radius: 10px; margin:5px" >{{i.notes}}</li>
+    
+{% endfor %}
+</ul>

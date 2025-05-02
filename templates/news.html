@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Notes Buddy</title>
+</head>
+<style>
+    textarea{
+        width: 300px;
+        height: 200px;
+    }
+    .news-box{
+        display: flex;
+
+        margin: 8px;
+        padding: 8px;
+        background-color: #eef;
+        color: blue;
+        border-radius: 8px
+    }
+    .img-1{
+        width:60px;
+        height: auto;
+        
+    }
+    .news-box p{
+        color:#333;
+        font-size: 14px;
+    }
+</style>
+<body>
+    <h2>Latest Business News</h2>
+
+    
+    {% comment %} {% for news, url ,thumbnail, snippet in news_list %}
+        <div class="news-box">
+            <a href="{{ url }}" traget="_blank">{{ news }}</a>
+            <img class="img-1" src="{{thumbnail}}">
+            <p>{{ snippet }} </p>
+        </div>
+            
+    {% endfor %} {% endcomment %}
+
+
+    {% for item in news_list %}
+    <div class="news-box">
+        <img class="img-1" src="{{item.thumbnail}}">
+        <div>
+        <a href="{{ item.newsurl }}" traget="_blank">{{ item.news }}</a>        
+        <p>{{ item.snippet }} </p>
+        </div>
+    </div>
+        
+    {% endfor %}
+
+
+
+</body>
+</html>

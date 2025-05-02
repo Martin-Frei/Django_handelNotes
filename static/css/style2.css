@@ -1,0 +1,16 @@
+img{
+    width: 200px;
+    height: auto;
+    border-color: black;
+}
+
+h2{
+    font-size: 150px;
+    color: yellowgreen;
+    font-style: italic;
+}
+
+p{
+    font-size: 100px;
+    color: black;
+}

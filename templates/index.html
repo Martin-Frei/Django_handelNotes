@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Notes Buddy</title>
+</head>
+<style>
+    textarea{
+        width: 300px;
+        height: 200px;
+    }
+    .news-box{
+        margin: 8px;
+        padding: 8px;
+        background-color: #eef;
+        color: blue;
+        border: 2px solid blue;
+        border-radius: 8px
+    }
+    .img{
+        width:30px;
+        height: auto;
+    }
+</style>
+<body>
+    {% include 'header.html' %} 
+    <H1>My Notes Buddy</H1>
+
+    {% comment %} <form method="POST">
+        {% csrf_token %}
+        <label for="eingabe">Eingabe:</label>
+        <textarea  id="eingabe"> </textarea>
+        <button type="submit">Absenden</button>
+    </form> {% endcomment %}
+
+    {% comment %} {% include 'add_note.html' %}  <!-- add-notes.html --> {% endcomment %}
+
+    <h2>Latest Business News</h2>
+
+    
+    {% for news, url, thumbnail in news_list %}
+        <div class="news-box">
+            <a href="{{ url }}" traget="_blank">{{ news }}</a>
+            <img class="img" src="{{thumbnail}}">
+
+            <h2><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></h2>
+            <p>{{ article.description }}</p>
+            {% if article.image_url %}
+                <img src="{{ article.image_url }}" alt="Article image">
+            {% endif %}
+            <p>Published on: {{ article.published_at }}</p>
+        </div>
+    {% endfor %}
+    
+    
+</body>
+</html>
