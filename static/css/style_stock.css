@@ -3,6 +3,34 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+.form{
+    width: 400px;
+    height: auto;
+    margin: 50px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 32px;
+}
+
+.from label{
+    font-size: 32px;
+    color: blue;    
+}
+
+.form input{
+    width: 100%;
+    height: 60px;
+}
+.form button{
+    padding: 5px 100px;
+    width: 100%px;
+    height: 30px;
+    background-color: black;
+    color: antiquewhite;
+}
 .main{
     display: flex;
     justify-content: center;

@@ -28,6 +28,14 @@ class News(models.Model):
     timestamp = models.IntegerField()
     
 
-class Ticker(models.Model) :
-    id = models.AutoField(primary_key = True)
-    ticker = models.CharField(max_length=10)
+# class Ticker(models.Model) :
+#     id = models.AutoField(primary_key = True)
+#     ticker = models.CharField(max_length=10)
+
+class Ticker(models.Model):
+    id = models.AutoField(primary_key=True)
+    ticker = models.CharField(max_length=10, unique=True)
+    active = models.BooleanField(default=True)  # ==> Frontend active or not
+
+    def __str__(self):
+        return f"{self.ticker} ({'Aktiv' if self.active else 'Inaktiv'})"

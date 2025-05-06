@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', mnbview.index, name='index'),
     path('getNews', mnbview.get_news, name='getNews'), 
-    path('getStock', mnbview.get_stock, name='getStock') 
+    path('getStock', mnbview.get_stock, name='getStock'),
+    path('removeStock/<str:ticker_name>/', mnbview.remove_stock, name='remove_stock') 
 ]

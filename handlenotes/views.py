@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import response
 from .models import HandleNotes
-from .forms import HandleNotesForm
+from .forms import HandleNotesForm, StockForm
 import requests
 import datetime
 import random
@@ -112,30 +112,22 @@ def save_news_to_db(news_list, timestamps, newsurls, thumbnails, snnipetList):
         
         
 def get_stock(request):
-    # context = {
-    # 'appel_stock': round(random.uniform(100, 200), 2),
-    # 'google_stock': round(random.uniform(100, 200), 2),
-    # 'microsoft_stock': round(random.uniform(100, 200), 2),
-    # }
-    
-    
-    # ticker = ("goog", "msft", "aapl")
-    ticker = tuple(Ticker.objects.values_list('ticker', flat = True))
-    
-    stock_price= {}
-
-    for elem in ticker:
-        price = getStockData(elem)
-        stock_price[elem]= price
+    form = StockForm(request.POST or None)
+    if form.is_valid():
+        form.save()
         
-    # print(stock_price)
-    context = {'prices':stock_price}
-    
-    return render(request,'stock.html', context)
+        if Ticker.ticker.active == False:
+            Ticker.ticker.active == True
+            
+            return redirect('getStock')  # reload page afte saving
 
-
-
-
+    ticker = tuple(Ticker.objects.filter(active=True).values_list('ticker', flat=True))
+    stock_price = {elem: getStockData(elem) for elem in ticker}
+    context = {
+        'prices': stock_price,
+        'form': form
+    }
+    return render(request, 'stock.html', context)
 
 
 def getStockData(ticker):
@@ -144,7 +136,9 @@ def getStockData(ticker):
 	url = "https://yahoo-finance127.p.rapidapi.com/finance-analytics/" + ticker
 
 	headers = {
-		"x-rapidapi-key": "76d2dd48e8msh592f8bc9b6421bdp1ff7b2jsn3e9a688ada91",
+	"x-rapidapi-key": "c4e9df0a1amshd32e9943d56e520p12fd4djsncc550df2cae5",
+	"x-rapidapi-host": "yahoo-finance166.p.rapidapi.com",
+
 		"x-rapidapi-host": "yahoo-finance127.p.rapidapi.com"
 	}
 
@@ -153,3 +147,6 @@ def getStockData(ticker):
 	return data["currentPrice"]["raw"]
 
 
+def remove_stock(request, ticker_name):
+    Ticker.objects.filter(ticker=ticker_name).update(active=False)
+    return redirect('getStock')

@@ -8,26 +8,36 @@
 </head>
 <link rel="stylesheet" href="{% static 'css/style_stock.css' %}">
 <body>
-  # creat a form 
-  # the form show in the frontend with autofrom
-  # ticker add and delet in the database
-  # submit button to change the frontend
+
+    <div class="form">
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Stock</button>
+    </form>
+    </div>
 
 
     <main class="main">
         {% for ticker, price in prices.items %}
         <div class="box">
-            <div><h2>{{ticker}}</h2> </div>            
-            <div><span>{{price}}</span></div>
-         </div>
+            <div><h2>{{ ticker }}</h2></div>            
+            <div><span>{{ price }}</span></div>
+            <div>
+                <a href="{% url 'remove_stock' ticker %}" style="color:red;">X </a>
+            </div>
+        </div>
         {% endfor %}
+    </main>
 
 
 
 
         
     </main>
-    
+    {% comment %} Grafik einfügen mit https://www.chartjs.org/ {% endcomment %}
+
+
 </body>
 <script src="{% static 'js/script_stock.js' %}"></script>   
 </html>
