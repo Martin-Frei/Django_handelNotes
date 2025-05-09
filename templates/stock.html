@@ -28,7 +28,7 @@
             <div><h2>{{ ticker }}</h2></div>            
             <div><span>{{ price }}</span></div>
             <div>
-                 {% comment %} <img src="https://logo.clearbit.com/{{ obj.domain }}" alt="Logo von {{ obj.ticker }}" width="60"> {% endcomment %}
+                 {% comment %} <img src="https://logo.clearbit.com/{{ domain }}" alt="Logo von {{ domain }}" width="60"> {% endcomment %}
                 <a href="{% url 'remove_stock' ticker %}" style="color:red;">X </a>
             </div>
         </div>
