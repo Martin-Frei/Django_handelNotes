@@ -10,11 +10,15 @@
 <body>
 
     <div class="form">
-  <form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Add Stock</button>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="id_ticker">Ticker:</label>
+        {{ form.ticker }}
+        <label for="id_domain">Domain:</label>
+        {{ form.domain }}
+        <button type="submit">Add Stock</button>
     </form>
+    
     </div>
 
 
@@ -24,18 +28,15 @@
             <div><h2>{{ ticker }}</h2></div>            
             <div><span>{{ price }}</span></div>
             <div>
+                 {% comment %} <img src="https://logo.clearbit.com/{{ obj.domain }}" alt="Logo von {{ obj.ticker }}" width="60"> {% endcomment %}
                 <a href="{% url 'remove_stock' ticker %}" style="color:red;">X </a>
             </div>
         </div>
         {% endfor %}
-    </main>
+    </main> 
 
+    {% comment %} <img src="https://logo.clearbit.com/{{ obj.domain }}" alt="Logo von {{ obj.ticker }}" width="60"> {% endcomment %}
 
-
-
-        
-    </main>
-    {% comment %} Grafik einfügen mit https://www.chartjs.org/ {% endcomment %}
 
 
 </body>

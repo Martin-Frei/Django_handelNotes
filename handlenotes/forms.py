@@ -11,7 +11,7 @@ class HandleNotesForm(forms.ModelForm):
 class StockForm(forms.ModelForm):
     class Meta:
         model = Ticker                  # Model ticker in models.py
-        fields = ['ticker']             # only the field ['ticker'] not __all__
+        fields = ['ticker','domain']    # only the field ['ticker' and 'domain]  !! not __all__ !!
         
         
    
