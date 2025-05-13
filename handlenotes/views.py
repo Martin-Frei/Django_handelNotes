@@ -115,28 +115,33 @@ def get_stock(request):
     form = StockForm(request.POST or None)
     if form.is_valid():
         form.save()
+        return redirect('getStock')  # reload page afte saving
         
-        if Ticker.ticker.active == False:
-            Ticker.ticker.active == True
-            
-            return redirect('getStock')  # reload page afte saving
+    # if Ticker.ticker.active == False:
+    #     Ticker.ticker.active == True
+        
+        # return redirect('getStock')  # reload page afte saving
 
     ticker = tuple(Ticker.objects.filter(active=True).values_list('ticker', flat=True))
-    stock_price = {elem: getStockData(elem) for elem in ticker}
+    domain = tuple(Ticker.objects.filter(active=True).values_list('domain', flat=True))
+    # stock_price = {elem: getStockData(elem) for elem in ticker}
+    # domains = {k:v for k,v in zip(ticker, domain)}
+    stockprices = [getStockData(t) for t in ticker]
+    res = zip(ticker, domain, stockprices)
     context = {
-        'prices': stock_price,
-        'form': form
+        'res': res,
+        'form': form        
     }
     return render(request, 'stock.html', context)
 
 
 def getStockData(ticker):
-	
+	return random.randint(100,400)
 
 	url = "https://yahoo-finance127.p.rapidapi.com/finance-analytics/" + ticker
 
 	headers = {
-	"x-rapidapi-key": "c4e9df0a1amshd32e9943d56e520p12fd4djsncc550df2cae5",
+	"x-rapidapi-key":"76d2dd48e8msh592f8bc9b6421bdp1ff7b2jsn3e9a688ada91",
 	"x-rapidapi-host": "yahoo-finance166.p.rapidapi.com",
 
 		"x-rapidapi-host": "yahoo-finance127.p.rapidapi.com"

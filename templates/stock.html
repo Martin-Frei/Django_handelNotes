@@ -23,12 +23,22 @@
 
 
     <main class="main">
-        {% for ticker, price in prices.items %}
+        {% comment %} {% for ticker, price in prices.items %}
         <div class="box">
             <div><h2>{{ ticker }}</h2></div>            
             <div><span>{{ price }}</span></div>
             <div>
-                 {% comment %} <img src="https://logo.clearbit.com/{{ domain }}" alt="Logo von {{ domain }}" width="60"> {% endcomment %}
+                 <img src="https://logo.clearbit.com/{{ domain }}" alt="Logo von {{ domain }}" width="60">
+                <a href="{% url 'remove_stock' ticker %}" style="color:red;">X </a>
+            </div>
+        </div>
+        {% endfor %} {% endcomment %}
+        {% for ticker, domain, price in res %}
+        <div class="box">
+            <div><h2>{{ ticker }}</h2></div>            
+            <div><span>{{ price }}</span></div>
+            <div>
+                 <img src="https://logo.clearbit.com/{{ domain }}" alt="Logo von {{ domain }}" width="60">
                 <a href="{% url 'remove_stock' ticker %}" style="color:red;">X </a>
             </div>
         </div>
@@ -36,7 +46,6 @@
     </main> 
 
     {% comment %} <img src="https://logo.clearbit.com/{{ obj.domain }}" alt="Logo von {{ obj.ticker }}" width="60"> {% endcomment %}
-
 
 
 </body>
